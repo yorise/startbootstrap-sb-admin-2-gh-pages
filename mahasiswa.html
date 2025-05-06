@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/sb-admin-2.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAdPnRnuW2FOT7BV2U3SkZMMrX_i8KsVnA",
+        authDomain: "latihan-projectfb.firebaseapp.com",
+        databaseURL:
+          "https://latihan-projectfb-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "latihan-projectfb",
+        storageBucket: "latihan-projectfb.firebasestorage.app",
+        messagingSenderId: "564574995958",
+        appId: "1:564574995958:web:dad7ca7f22fd569511b3d7",
+        measurementId: "G-2TSZ556HXH",
+      };
+
+      // Initialize Firebase
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app(); // if already initialized
+      }
+    </script>
+  </head>
+  <body id="page-top" onload="getdata()">
+     <!-- Page Wrapper -->
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <ul
+          class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+          id="accordionSidebar"
+        >
+          <!-- Sidebar - Brand -->
+          <a
+            class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="index.html"
+          >
+            <div class="sidebar-brand-icon rotate-n-15">
+              <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">SI Akademik</div>
+          </a>
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0" />
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Dashboard</span></a
+            >
+          </li>
+          <!-- Divider -->
+          <hr class="sidebar-divider" />
+          <!-- Heading -->
+          <div class="sidebar-heading">Menu</div>
+          <!-- Nav Item - Charts -->
+          <li class="nav-item">
+            <a class="nav-link" href="matkul.html">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Mata Kuliah</span></a
+            >
+          </li>
+          <!-- Nav Item - Tables -->
+          <li class="nav-item">
+            <a class="nav-link" href="dosen.html">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Dosen</span></a
+            >
+          </li>
+          <!-- Nav Item - Tables -->
+          <li class="nav-item">
+            <a class="nav-link" href="mengajar.html">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Mengajar</span></a
+            >
+          </li>
+                  <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="mahasiswa.html">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Mahasiswa</span></a
+            >
+          </li>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+          <!-- Main Content -->
+          <div id="content">
+            <!-- Topbar -->
+            <nav
+              class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+            >
+              <!-- Sidebar Toggle (Topbar) -->
+              <button
+                id="sidebarToggleTop"
+                class="btn btn-link d-md-none rounded-circle mr-3"
+              >
+                <i class="fa fa-bars"></i>
+              </button>
+              <!-- Topbar Navbar -->
+              <ul class="navbar-nav ml-auto">
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="userDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                      >Administrator</span
+                    >
+                    <img
+                      class="img-profile rounded-circle"
+                      src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
+                    />
+                  </a>
+                  <!-- Dropdown - User Information -->
+                  <div
+                    class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                    aria-labelledby="userDropdown"
+                  >
+                    <a class="dropdown-item" href="forgot-password.html">
+                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Ubah Password
+                    </a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      data-toggle="modal"
+                      data-
+                      target="#logoutModal"
+                    >
+                      <i
+                        class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                      ></i>
+                      Logout
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+            <!-- End of Topbar -->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+      <!-- Page Heading -->
+      <h1 class="h3 mb-4 text-gray-800">
+        Mahasiswa
+        <a href="add-mahasiswa.html" class="btn btn-success btn-user"
+          >Tambah Baru</a
+        >
+      </h1>
+      <hr />
+
+      <form class="user">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="uid"
+            placeholder="ID"
+            readonly
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="kode"
+            placeholder="Kode Mahasiswa"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            placeholder="Nama Mahasiswa"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="gambar"
+            name="gambar"
+            placeholder="Foto"
+            readonly
+          />
+        </div>
+
+        <input
+          type="button"
+          value="Update"
+          onclick="update_user();"
+          class="btn btn-warning btn-user"
+        />
+        <input
+          type="button"
+          value="Delete"
+          onclick="delete_user();"
+          class="btn btn-danger btn-user"
+        />
+        <a
+          id="myAnchor"
+          href="edit-foto-mahasiswa.html"
+          class="btn btn-primary btn-user"
+          >Ganti Foto</a
+        >
+
+        <hr />
+      </form>
+
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Information</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              id="tb_mhs"
+              class="table table-bordered"
+              width="100%"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Foto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data rows akan ditambahkan secara dinamis -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Main Content -->
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script>
+        function getdata() {
+            var tbMhs = document.getElementById('tb_mhs');
+            var databaseRef = firebase.database().ref('mahasiswa/');
+            var rowIndex = 1;
+    
+            databaseRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+    
+                    var row = tbMhs.insertRow(rowIndex);
+                    var cellId = row.insertCell(0);
+                    var cellKode = row.insertCell(1);
+                    var cellNama = row.insertCell(2);
+                    var cellFoto = row.insertCell(3);
+    
+                    cellId.appendChild(document.createTextNode(childKey));
+                    cellKode.appendChild(document.createTextNode(childData.kode));
+                    cellNama.appendChild(document.createTextNode(childData.nama));
+    
+                    // Ambil URL gambar dari Firebase Storage
+                    var storage = firebase.storage();
+                    var pathReference = storage.ref();
+                    pathReference.child('images/' + childData.foto).getDownloadURL().then(function(url) {
+                        var img = document.createElement('img');
+                        img.src = url;
+                        img.width = 150;
+                        cellFoto.appendChild(img);
+                    }).catch(function(error) {
+                        // Handle any errors
+                        console.error('Error fetching image URL:', error);
+                    });
+    
+                    rowIndex++;
+                });
+    
+                // Tambahkan event klik ke setiap baris
+                var table = document.getElementById("tb_mhs");
+                var rows = table.getElementsByTagName("tr");
+    
+                for (let i = 1; i < rows.length; i++) { // Mulai dari index 1 untuk skip header
+                    var currentRow = table.rows[i];
+    
+                    currentRow.onclick = function() {
+                        var cells = currentRow.getElementsByTagName("td");
+    
+                        var id = cells[0].innerHTML;
+                        var kode = cells[1].innerHTML;
+                        var nama = cells[2].innerHTML;
+                        var gambarHTML = cells[3].innerHTML;
+    
+                        document.getElementById('uid').value = id;
+                        document.getElementById('kode').value = kode;
+                        document.getElementById('nama').value = nama;
+                        document.getElementById("myAnchor").href = "edit-foto-mahasiswa.html?id=" + id;
+    
+                        // Ekstrak nama file dari elemen innerHTML
+                        var filename = gambarHTML.replace(/^.*[\\\/]/, '');
+                        filename = filename.substring(9);
+                        const arrayfoto = filename.split("?");
+                        document.getElementById('gambar').value = arrayfoto[0];
+                    };
+                }
+            });
+        }
+    
+        function update_user() {
+            var kode = document.getElementById('kode').value;
+            var nama = document.getElementById('nama').value;
+            var uid = document.getElementById('uid').value;
+            var foto = document.getElementById('gambar').value;
+    
+            var data = {
+                kode: kode,
+                nama: nama,
+                foto: foto
+            };
+    
+            var updates = {};
+            updates['/mahasiswa/' + uid] = data;
+    
+            firebase.database().ref().update(updates)
+                .then(() => {
+                    alert('Mahasiswa updated successfully!');
+                    reload_page();
+                })
+                .catch((error) => {
+                    console.error('Update failed:', error);
+                });
+        }
+    
+        function delete_user() {
+            var uid = document.getElementById('uid').value;
+    
+            firebase.database().ref().child('/mahasiswa/' + uid).remove()
+                .then(() => {
+                    alert('Mahasiswa deleted successfully!');
+                    reload_page();
+                })
+                .catch((error) => {
+                    console.error('Delete failed:', error);
+                });
+        }
+    
+        function reload_page() {
+            window.location.reload();
+        }
+    </script>
+    
+  </body>
+</html>
